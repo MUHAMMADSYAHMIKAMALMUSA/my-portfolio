@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (form) {
         form.addEventListener("submit", function (event) {
+            // Sentiasa sekat hantaran asal untuk memproses validasi JS penuh (Kriteria Rubrik 1.8)
+            event.preventDefault(); 
+            
             let isValid = true;
 
             // 1.1 Validasi Nama Penuh
@@ -36,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 emailError.textContent = "";
             }
 
-            // 1.3 DIKEMASKINI: Validasi Subject (Menggantikan Password untuk elak sekatan Formspree)
+            // 1.3 Validasi Subject
             const subject = document.getElementById("subject").value.trim();
             const subjectError = document.getElementById("subjectError");
             if (subject === "") {
@@ -96,12 +99,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 termsError.textContent = "";
             }
 
-            // PERBAIKAN: Jika ada input tidak sah, halang hantaran borang ke Formspree
-            if (!isValid) {
-                event.preventDefault(); 
-            } else {
+            // Jika semua input borang diisi dengan sah (Valid)
+            if (isValid) {
                 alert("Validation successful! Submitting data via Formspree...");
-                // Biarkan form diproses secara alami oleh atribut action Formspree
+                
+                // Guna API FormData terbina dalam JS untuk mengikat semula data teks dan fail 
+                // secara serentak sebelum dihantar ke pelan percuma Formspree.
+                const formData = new FormData(form);
+                
+                fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Success! Your message and data fields have been securely delivered.");
+                        form.reset(); // Kosongkan borang selepas berjaya
+                    } else {
+                        alert("Oops! There was a problem submitting your form.");
+                    }
+                })
+                .catch(error => {
+                    alert("Error connection to Formspree server.");
+                });
             }
         });
     }
