@@ -25,7 +25,7 @@
             <h2>Contact Me</h2>
             <p class="form-desc">Please fill out the form below to contact me. All fields are required.</p>
             
-            <form id="contactForm" action="#" method="POST" novalidate>
+            <form id="contactForm" action="https://formspree.io/f/mdarzyab" method="POST" novalidate>
                 
                 <div class="form-group">
                     <label for="fullName">Full Name:</label>
@@ -40,9 +40,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Enter password">
-                    <span class="error-msg" id="passwordError"></span>
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" placeholder="Enter subject/message purpose">
+                    <span class="error-msg" id="subjectError"></span>
                 </div>
 
                 <div class="form-group">
@@ -82,27 +82,6 @@
         <p>&copy; 2026 All Rights Reserved | Designed by Muhammad Syahmi</p>
     </footer>
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // Menghentikan tindakan refresh asal browser
-            e.preventDefault();
-            
-            // Mengambil data input untuk pengesahan ringkas
-            const name = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const dob = document.getElementById('dob').value;
-            const terms = document.getElementById('terms').checked;
-            
-            // Sekiranya semua ruangan asas telah diisi (Melewati validasi script.js kau)
-            if(name && email && password && dob && terms) {
-                alert('Thank you, ' + name + '! Your message has been sent successfully.');
-                this.reset(); // Mengosongkan semula borang selepas berjaya
-            } else {
-                alert('Please fix the errors in the form before submitting.');
-            }
-        });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
