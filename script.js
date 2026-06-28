@@ -1,5 +1,5 @@
 // =========================================================================
-// 1. SITEM PENGESAHAN BORANG HUBUNGI (CONTACT FORM VALIDATION - contact.html)
+// 1. SISTEM PENGESAHAN BORANG HUBUNGI (CONTACT FORM VALIDATION - contact.html)
 // =========================================================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (form) {
         form.addEventListener("submit", function (event) {
-            // Menghalang borang daripada dihantar secara automatik sebelum diperiksa
-            event.preventDefault(); 
-            
             let isValid = true;
 
             // 1.1 Validasi Nama Penuh
@@ -39,17 +36,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 emailError.textContent = "";
             }
 
-            // 1.3 Validasi Kata Laluan
-            const password = document.getElementById("password").value;
-            const passwordError = document.getElementById("passwordError");
-            if (password === "") {
-                passwordError.textContent = "Please enter your password.";
+            // 1.3 DIKEMASKINI: Validasi Subject (Menggantikan Password untuk elak sekatan Formspree)
+            const subject = document.getElementById("subject").value.trim();
+            const subjectError = document.getElementById("subjectError");
+            if (subject === "") {
+                subjectError.textContent = "Please enter your subject or message purpose.";
                 isValid = false;
-            } else if (password.length < 6) {
-                passwordError.textContent = "Password must be at least 6 characters long.";
+            } else if (subject.length < 5) {
+                subjectError.textContent = "Subject must be at least 5 characters long.";
                 isValid = false;
             } else {
-                passwordError.textContent = "";
+                subjectError.textContent = "";
             }
 
             // 1.4 Validasi Tarikh Lahir
@@ -99,10 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 termsError.textContent = "";
             }
 
-            // Jika semua input borang diisi dengan sah (Valid)
-            if (isValid) {
-                alert("Validation successful! Submitting data to Laragon server...");
-                form.submit(); // Menghantar borang ke fail backend PHP di Laragon
+            // PERBAIKAN: Jika ada input tidak sah, halang hantaran borang ke Formspree
+            if (!isValid) {
+                event.preventDefault(); 
+            } else {
+                alert("Validation successful! Submitting data via Formspree...");
+                // Biarkan form diproses secara alami oleh atribut action Formspree
             }
         });
     }
