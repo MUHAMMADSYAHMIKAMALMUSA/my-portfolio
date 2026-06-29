@@ -3,85 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio | Contact Me</title>
+    <title>Contact | Muhammad Syahmi Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">Syahmi's Portfolio</div>
-        <nav>
+    <!-- Global Header & Navigation -->
+    <header class="global-header">
+        <div class="logo-container">
+            <span class="logo-text">Syahmi<span class="accent-dot">.</span></span>
+        </div>
+        <nav class="nav-menu">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
-                <li><a href="game.html">Interactive</a></li>
+                <li><a href="game.html">Interactive Game</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="contact-container">
-        <div class="form-card">
-            <h2>Contact Me</h2>
-            <p class="form-desc">Please fill out the form below to contact me. All fields are required.</p>
-            
-            <form id="contactForm" action="https://formspree.io/f/mdarzyab" method="POST" novalidate>
+    <!-- Main Content Section -->
+    <main class="main-layout">
+        <section class="form-container-card">
+            <div class="form-header">
+                <h2>Get In Touch</h2>
+                <p>Please populate the form below to initiate a simulated front-end communication pipeline.</p>
+            </div>
+
+            <!-- Interactivity hooked via JavaScript onsubmit event -->
+            <form id="contactForm" novalidate>
                 
-                <div class="form-group">
-                    <label for="fullName">Full Name:</label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name">
+                <!-- 1. Text Input (Full Name) -->
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="e.g. John Doe">
                     <span class="error-msg" id="nameError"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" placeholder="example@email.com">
+                <!-- 2. Email Input -->
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="e.g. john@example.com">
                     <span class="error-msg" id="emailError"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="subject">Subject:</label>
-                    <input type="text" id="subject" name="subject" placeholder="Enter subject/message purpose">
-                    <span class="error-msg" id="subjectError"></span>
+                <!-- 3. Password Input -->
+                <div class="input-group">
+                    <label for="password">Security Password</label>
+                    <input type="password" id="password" placeholder="Enter secure string token">
+                    <span class="error-msg" id="passwordError"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob">
+                <!-- 4. Date Input -->
+                <div class="input-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob">
                     <span class="error-msg" id="dobError"></span>
                 </div>
 
-                <div class="form-group">
-                    <label>Gender:</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="gender" value="Male"> Male</label>
-                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                <!-- 5. Radio Buttons (Gender) -->
+                <div class="input-group">
+                    <label>Gender Orientation</label>
+                    <div class="radio-flex-group">
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="Male"> Male
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="Female"> Female
+                        </label>
                     </div>
                     <span class="error-msg" id="genderError"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="userPhoto">Profile Photo URL / Name:</label>
-                    <input type="text" id="userPhoto" name="userPhoto" placeholder="e.g., profile.jpg or image link">
-                    <span class="error-msg" id="photoError"></span>
+                <!-- 6. File Upload Input -->
+                <div class="input-group">
+                    <label for="profileImage">Upload Identification Photo</label>
+                    <input type="file" id="profileImage" accept="image/*">
+                    <span class="error-msg" id="fileError"></span>
                 </div>
 
-                <div class="form-group checkbox-group">
-                    <label>
-                        <input type="checkbox" id="terms" name="terms"> I agree to the terms and conditions.
+                <!-- 7. Checkbox Input (Terms Compliance) -->
+                <div class="input-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms">
+                        I hereby acknowledge and agree to the simulated terms of processing.
                     </label>
                     <span class="error-msg" id="termsError"></span>
                 </div>
 
-                <button type="submit" class="btn submit-btn">Submit</button>
+                <!-- Action Submit Button Control -->
+                <button type="submit" class="submit-btn">Execute Transmission</button>
             </form>
-        </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 All Rights Reserved | Designed by Muhammad Syahmi</p>
+    <!-- Global Footer Element -->
+    <footer class="global-footer">
+        <p>&copy; 2026 Muhammad Syahmi. Designed for DFI20433 Web Development Architecture.</p>
     </footer>
 
+    <!-- Custom Mock-Submission Popup Modal Layout -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">&#10003;</div>
+            <h2>Submission Successful!</h2>
+            <p>Thank you. Your structured message payload has been successfully validated and intercepted via front-end simulation loops.</p>
+            <button type="button" onclick="closeModal()" class="close-modal-btn">Dismiss Anchor</button>
+        </div>
+    </div>
+
+    <!-- Script Injection -->
     <script src="script.js"></script>
 </body>
 </html>
