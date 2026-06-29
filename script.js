@@ -1,5 +1,5 @@
 // =========================================================================
-// 1. SISTEM PENGESAHAN BORANG HUBUNGI (CONTACT FORM VALIDATION - contact.html)
+// 1. SISTEM PENGESAHAN BORANG HUBUNGI & SIMULASI POP-UP (contact.html)
 // =========================================================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -39,17 +39,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 emailError.textContent = "";
             }
 
-            // 1.3 Validasi Subject
-            const subject = document.getElementById("subject").value.trim();
-            const subjectError = document.getElementById("subjectError");
-            if (subject === "") {
-                subjectError.textContent = "Please enter your subject or message purpose.";
+            // 1.3 Validasi Kata Laluan (Password)
+            const password = document.getElementById("password").value.trim();
+            const passwordError = document.getElementById("passwordError");
+            if (password === "") {
+                passwordError.textContent = "Please enter a security password.";
                 isValid = false;
-            } else if (subject.length < 5) {
-                subjectError.textContent = "Subject must be at least 5 characters long.";
+            } else if (password.length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters long.";
                 isValid = false;
             } else {
-                subjectError.textContent = "";
+                passwordError.textContent = "";
             }
 
             // 1.4 Validasi Tarikh Lahir
@@ -80,13 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // 1.6 Validasi Muat Naik Gambar Profil
-            const photo = document.getElementById("userPhoto").value;
-            const photoError = document.getElementById("photoError");
+            const photo = document.getElementById("profileImage").value;
+            const fileError = document.getElementById("fileError");
             if (photo === "") {
-                photoError.textContent = "Please upload your profile photo.";
+                fileError.textContent = "Please upload your profile photo.";
                 isValid = false;
             } else {
-                photoError.textContent = "";
+                fileError.textContent = "";
             }
 
             // 1.7 Validasi Checkbox Terma & Syarat
@@ -99,36 +99,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 termsError.textContent = "";
             }
 
-            // Jika semua input borang diisi dengan sah (Valid)
+            // MODIFIKASI: Jika semua input borang valid, cetus pop-up modal interaktif (Acah-acah Berjaya)
             if (isValid) {
-                alert("Validation successful! Submitting data via Formspree...");
-                
-                // Guna API FormData terbina dalam JS untuk mengikat semula data teks dan fail 
-                // secara serentak sebelum dihantar ke pelan percuma Formspree.
-                const formData = new FormData(form);
-                
-                fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        alert("Success! Your message and data fields have been securely delivered.");
-                        form.reset(); // Kosongkan borang selepas berjaya
-                    } else {
-                        alert("Oops! There was a problem submitting your form.");
-                    }
-                })
-                .catch(error => {
-                    alert("Error connection to Formspree server.");
-                });
+                showSuccessModal();
             }
         });
     }
 });
+
+// Fungsi untuk memaparkan Custom Popup Modal
+function showSuccessModal() {
+    const modal = document.getElementById("successModal");
+    if (modal) {
+        modal.classList.add("active");
+    }
+}
+
+// Fungsi untuk menutup Custom Popup Modal dan reset borang
+function closeModal() {
+    const modal = document.getElementById("successModal");
+    const form = document.getElementById("contactForm");
+    if (modal) {
+        modal.classList.remove("active");
+    }
+    if (form) {
+        form.reset(); // Mengosongkan semula semua input borang selepas ditutup
+    }
+}
 
 
 // =========================================================================
@@ -164,7 +161,7 @@ function initMaze() {
             if (mazeLayout[r][c] === 'S') cell.classList.add("start");
             if (mazeLayout[r][c] === 'F') cell.classList.add("end");
 
-            // PERBAIKAN: Memeriksa posisi koordinat semasa robot melangkah
+            // Memeriksa posisi koordinat semasa robot melangkah
             if (r === robotRow && c === robotCol) {
                 // Ikon robot 🤖 akan sentiasa dilukis mengikut posisinya tanpa ghaib
                 cell.innerHTML = `<span id="robot" class="robot ${robotDir}">🤖</span>`;
